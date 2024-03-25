@@ -1,33 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap");
+
 @tailwind base;
-@tailwind components;
 @tailwind utilities;
+@tailwind components;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
+*,
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.Toastify__toast-container {
+  z-index: 100;
+  width: 380px;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.Toastify__toast--success {
+  font-size: medium;
+  text-align: center;
+  color: rgb(75, 141, 75);
+  background: rgb(255, 255, 255);
+}
+
+.Toastify__toast--info {
+  text-align: center;
+  color: rgb(52, 106, 182);
+  background: rgb(255, 255, 255);
+}
+
+.Toastify__toast--warning {
+  text-align: center;
+  color: rgb(187, 187, 93);
+  background: rgb(255, 255, 255);
+}
+
+.Toastify__toast--error {
+  color: rgb(186, 75, 75);
+  text-align: center;
+  background: rgb(255, 255, 255);
 }
