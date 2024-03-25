@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata: Metadata = {
   title: "Todo Web App",
-  description: "This is the web app for todo",
+  description: "This is an authenticated todo web app",
 };
 
 export default function RootLayout({
