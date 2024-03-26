@@ -25,6 +25,11 @@ export interface ItemTypes {
 export interface IDType {
     id: number;
 }
+export interface TodoType {
+    id: number;
+    name: string;
+    description: string;
+}
 declare module "next-auth" {
     interface User {
         username: string

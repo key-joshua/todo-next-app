@@ -18,9 +18,9 @@ const Delete = (props: IDType) => {
 
         if (response.ok) {
             toast.success(responseData.message);
-            setTimeout(() => { router.refresh() }, 4500);
+           return setTimeout(() => { router.refresh() }, 4500);
         } else {
-            return toast.error(responseData.error);
+            toast.error(responseData.error);
             setTimeout(() => { router.refresh() }, 4500);
         }
     };
