@@ -1,6 +1,6 @@
-import { db } from "@/libs/db";
-import { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { db } from '@/libs/db';
+import { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 interface Body {
   name: string;
@@ -9,11 +9,11 @@ interface Body {
 
 export const POST = async (req: NextRequest): Promise<NextResponse> => {
   try {
-    if (req.method !== "POST")
+    if (req.method !== 'POST')
       return NextResponse.json(
         {
           status: 405,
-          error: "Method not allowed",
+          error: 'Method not allowed',
         },
         { status: 405 }
       );
@@ -26,7 +26,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
       return NextResponse.json(
         {
           status: 409,
-          error: "Task with this name already exist",
+          error: 'Task with this name already exist',
         },
         { status: 409 }
       );
@@ -42,7 +42,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
     return NextResponse.json(
       {
         status: 200,
-        message: "Task created successfully",
+        message: 'Task created successfully',
         data: newTodo,
       },
       { status: 200 }
@@ -60,20 +60,29 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 
 export const GET = async (req: NextRequest): Promise<NextResponse> => {
   try {
-    if (req.method !== "GET")
+    if (req.method !== 'GET')
       return NextResponse.json(
         {
           status: 405,
-          error: "Method not allowed",
+          error: 'Method not allowed',
         },
         { status: 405 }
       );
 
     const todos = await db.todos.findMany();
+    if (todos.length < 1)
+      return NextResponse.json(
+        {
+          status: 404,
+          error: 'Task not found',
+        },
+        { status: 404 }
+      );
+
     return NextResponse.json(
       {
         status: 200,
-        message: "Task created successfully",
+        message: 'Task viewed successfully',
         data: todos,
       },
       { status: 200 }
@@ -91,11 +100,11 @@ export const GET = async (req: NextRequest): Promise<NextResponse> => {
 
 export const PUT = async (req: NextRequest): Promise<NextResponse> => {
   try {
-    if (req.method !== "PUT")
+    if (req.method !== 'PUT')
       return NextResponse.json(
         {
           status: 405,
-          error: "Method not allowed",
+          error: 'Method not allowed',
         },
         { status: 405 }
       );
@@ -159,14 +168,12 @@ export const DELETE = async (req: NextRequest): Promise<NextResponse> => {
         { status: 405 }
       );
 
-    const body = await req.json();
-    const { name, description }: Body = body;
-    const id = req.nextUrl.searchParams.get("id");
+    const id = req.nextUrl.searchParams.get('id');
     if (!id) {
       return NextResponse.json(
         {
           status: 404,
-          error: "Id param not found",
+          error: 'ID param not found',
         },
         { status: 404 }
       );
@@ -177,18 +184,17 @@ export const DELETE = async (req: NextRequest): Promise<NextResponse> => {
       return NextResponse.json(
         {
           status: 404,
-          error: "Task not found",
+          error: 'Task not found',
         },
         { status: 404 }
       );
     }
-
-    const updatedTodo = await db.todos.delete({ where: { id: Number(id) } });
-
+    
+    await db.todos.delete({ where: { id: Number(id) } });
     return NextResponse.json(
       {
         status: 200,
-        message: "Task deleted successfully",
+        message: 'Task deleted successfully',
       },
       { status: 200 }
     );

@@ -22,7 +22,9 @@ export interface ItemTypes {
     tag: string;
     href: string;
 }
-
+export interface IDType {
+    id: number;
+}
 declare module "next-auth" {
     interface User {
         username: string
