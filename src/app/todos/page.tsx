@@ -1,10 +1,11 @@
 import { authOptions } from '@/libs/auth';
+import { redirect } from 'next/navigation';
 import View from '@/components/table/View';
 import { getServerSession } from 'next-auth';
 
 const Todos = async () => {
     const session = await getServerSession(authOptions);
-    if (!session) return window.location.replace('/');
+    if (!session) return redirect('/');
 
     return (
         <main className="w-full py-8 flex flex-col items-center">
